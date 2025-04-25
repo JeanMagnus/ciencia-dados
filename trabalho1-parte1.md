@@ -1,66 +1,90 @@
-# 🔥 Análise Inicial do Dataset "Forest Fires in Brazil"
+# 📊 Projeto de Análise de Dados – Parte I
 
-## 📌 Introdução
+## 🧠 Introdução
 
-O presente trabalho tem como objetivo a análise do dataset *Forest Fires in Brazil*, que contém registros oficiais de focos de incêndios em todos os estados brasileiros entre os anos de 1998 e 2017. Os dados foram coletados e disponibilizados pelo INPE (Instituto Nacional de Pesquisas Espaciais) e estão acessíveis na plataforma Kaggle.
+Neste projeto, será utilizado o dataset **"Mental Health in Tech Survey"**, disponível no Kaggle, que reúne respostas de profissionais da área de tecnologia sobre saúde mental no ambiente de trabalho. A pesquisa foi organizada pela **OSMI (Open Sourcing Mental Illness)**, organização que promove conscientização sobre saúde mental, especialmente em ambientes técnicos.
 
-A análise de incêndios florestais é de extrema importância, especialmente no contexto brasileiro, onde biomas como a Amazônia e o Cerrado sofrem intensamente com queimadas ilegais e desmatamento. Investigar padrões temporais, sazonais e geográficos desses eventos pode apoiar políticas públicas de preservação ambiental, identificar regiões críticas e auxiliar na tomada de decisão de órgãos ambientais.
+A análise desse tipo de dado é extremamente relevante, pois a saúde mental vem se tornando um tema central nas discussões sobre qualidade de vida no trabalho. Identificar padrões, barreiras ao tratamento e relações com condições laborais pode ajudar empresas e profissionais a tomarem decisões mais conscientes e humanizadas.
 
----
+## 🗃️ Sobre o Dataset
 
-## 🧾 Sobre o Dataset
+- **Fonte:** [Kaggle - Mental Health in Tech Survey](https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey)
+- **Formato:** CSV
+- **Total de linhas:** Aproximadamente 1.400
+- **Total de colunas:** 27
+- **Tipo de dados:** Qualitativos e quantitativos
 
-O arquivo utilizado tem o nome `amazon.csv` e contém 6.454 registros. Cada linha representa a ocorrência de incêndios em um estado brasileiro em determinado mês e ano.
+## 📌 Variáveis de Interesse
 
-As colunas presentes no dataset são:
+Algumas variáveis selecionadas para análise incluem:
 
-| Coluna  | Tipo     | Descrição |
-|---------|----------|-----------|
-| `year`  | Numérico | Ano do registro do incêndio |
-| `state` | Texto    | Estado brasileiro onde o incêndio ocorreu |
-| `month` | Texto    | Mês do registro do incêndio |
-| `number`| Numérico | Número de focos de incêndio registrados |
-| `date`  | Texto    | Combinação do mês e ano no formato `mm/yyyy` |
+| Coluna                    | Descrição                                                                 |
+|--------------------------|---------------------------------------------------------------------------|
+| `Age`                    | Idade do participante                                                     |
+| `Gender`                 | Gênero do participante                                                    |
+| `Country`                | País de residência                                                        |
+| `self_employed`          | Indica se o participante trabalha por conta própria                       |
+| `family_history`         | Histórico familiar de problemas de saúde mental                          |
+| `treatment`              | Já procurou tratamento para saúde mental?                                 |
+| `work_interfere`         | A saúde mental interfere no trabalho?                                     |
+| `no_employees`           | Tamanho da empresa                                                        |
+| `remote_work`            | Trabalha remotamente?                                                     |
+| `benefits`               | A empresa oferece suporte psicológico?                                    |
+| `care_options`           | Existem opções de cuidado mental na empresa?                              |
+| `wellness_program`       | A empresa oferece programas de bem-estar?                                 |
 
----
+## 🔍 Detecção de Dados Faltantes
 
-## 🛠️ Verificação de Dados Faltantes
-
-Para garantir a integridade das análises futuras, foi realizada uma inspeção inicial para identificar a presença de valores ausentes no dataset. Abaixo, segue o código utilizado em Python (utilizando a biblioteca `pandas`):
+Para verificar a existência de dados ausentes, foi utilizado o seguinte código em Python:
 
 ```python
 import pandas as pd
 
-# Carregar o dataset com encoding adequado
-df = pd.read_csv('amazon.csv', encoding='latin1')
+# Carregar o dataset
+df = pd.read_csv('survey.csv')
 
-# Verificar a quantidade de valores ausentes por coluna
+# Verificar a quantidade de valores nulos por coluna
 print(df.isnull().sum())
-
 ```
 
-## 📈 Resultado obtido
+### ✅ Resultado obtido:
 
+```
+state                         515
+self_employed                  18
+work_interfere                264
+comments                     1095
+Todas as outras colunas      0 valores ausentes
+```
 
-A análise preliminar mostra que nenhuma coluna do dataset apresenta valores ausentes. Isso é extremamente positivo, pois elimina a necessidade de técnicas de imputação ou exclusão de dados. A consistência do dataset permite avançar diretamente para etapas mais complexas, como visualização, agrupamentos e análises estatísticas, sem prejuízo de qualidade ou necessidade de tratamento para ausência de dados.
+## 🛠️ Tratamento de Dados (Pré-processamento)
 
-## 🔍 Possíveis Análises Futuras
-Com base na estrutura do dataset, diversas análises podem ser realizadas, tais como:
+Para as análises futuras, serão realizados os seguintes tratamentos:
 
-- Tendência temporal: evolução dos incêndios florestais ao longo dos anos;
+- **Remoção ou imputação de dados ausentes:**
+  - `work_interfere` e `self_employed`: preenchimento com a moda
+  - `state`: pode ser descartada caso o foco não seja específico nos EUA
+  - `comments`: será desconsiderada por conter dados não estruturados e opcionais
 
-- Distribuição mensal: identificação de padrões sazonais na ocorrência dos focos;
+- **Padronização de valores textuais:**
+  - Ex: normalizar valores da coluna `Gender`, que aparecem de formas variadas
 
-- Comparação geográfica: análise entre os estados ou regiões brasileiras;
+- **Codificação de variáveis categóricas** para análises quantitativas (ex: Label Encoding ou One-Hot Encoding)
 
-- Análise estatística: cálculo de médias, desvios, outliers por estado e por mês;
+- **Remoção de outliers**, especialmente na coluna `Age`, que contém valores extremos (ex: < 10 anos ou > 100)
 
-- Mapas e visualizações: uso de gráficos e mapas para representar espacialmente os dados;
+## 🔮 Possíveis Análises Futuras
 
-- Análise de políticas públicas: investigar impactos de ações governamentais em anos específicos.
+Com o dataset limpo e preparado, será possível realizar diversas análises, como:
 
-## 🧠 Considerações Finais
+- Comparação entre **profissionais com e sem histórico familiar de problemas mentais**
+- Relação entre **ambiente de trabalho remoto/presencial** e a **busca por tratamento**
+- Investigação sobre o **impacto do suporte da empresa (benefits, care_options)** na saúde mental
+- Análise de **diferenças por país, idade e gênero**
+- Visualizações de distribuição e correlação entre variáveis
 
-O dataset escolhido oferece grande potencial para investigar padrões e tendências dos incêndios florestais no Brasil. Sua riqueza temporal e geográfica permite análises profundas que podem contribuir com a conservação ambiental e formulação de estratégias de combate às queimadas ilegais.
+Essas análises poderão gerar insights valiosos sobre como melhorar o suporte à saúde mental no setor de tecnologia.
 
-Nos próximos passos, serão realizadas visualizações e análises mais aprofundadas, com o objetivo de extrair informações relevantes e propor insights com base nos dados.
+## 📌 Conclusão
+
+O dataset da OSMI é uma rica fonte de dados sobre saúde mental no setor de tecnologia. Através de uma análise bem conduzida, será possível extrair informações relevantes que podem contribuir tanto para a comunidade profissional quanto para decisões empresariais mais responsáveis.
