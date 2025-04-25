@@ -79,9 +79,10 @@ Com o dataset limpo e preparado, será possível realizar diversas análises, co
 
 - Comparação entre **profissionais com e sem histórico familiar de problemas mentais**
 - Relação entre **ambiente de trabalho remoto/presencial** e a **busca por tratamento**
-- Investigação sobre o **impacto do suporte da empresa (benefits, care_options)** na saúde mental
 - Análise de **diferenças por país, idade e gênero**
-- Visualizações de distribuição e correlação entre variáveis
+- Pessoas de **diferentes gêneros** procuram tratamento psicológico com a mesma frequência?
+- Pessoas **trans ou não-binárias** estão mais expostas a problemas ou têm menos apoio?
+- Gênero influencia o **medo** de sofrer consequências no trabalho ao falar sobre saúde mental?
 
 Essas análises poderão gerar insights valiosos sobre como melhorar o suporte à saúde mental no setor de tecnologia.
 
