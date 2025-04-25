@@ -1,5 +1,8 @@
-# 📊 Projeto de Análise de Dados – Parte I
+# 📊 Projeto de Ciência de Dados – Parte I
 
+* Componentes: 
+    - Jean Magnus Araujo de Souza Junior
+    - Laíze Suélia da Silva Oliveira
 ## 🧠 Introdução
 
 Neste projeto, será utilizado o dataset **"Mental Health in Tech Survey"**, disponível no Kaggle, que reúne respostas de profissionais da área de tecnologia sobre saúde mental no ambiente de trabalho. A pesquisa foi organizada pela **OSMI (Open Sourcing Mental Illness)**, organização que promove conscientização sobre saúde mental, especialmente em ambientes técnicos.
